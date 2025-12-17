@@ -1,135 +1,50 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useState, useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import Countdown from '@/components/Countdown';
+import Features from '@/components/Features';
+import HowItWorks from '@/components/HowItWorks';
+import Testimonials from '@/components/Testimonials';
+import CTA from '@/components/CTA';
+import Footer from '@/components/Footer';
 
 export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
+
   useEffect(() => {
-    // Countdown logic
-    const launchDate = new Date();
-    launchDate.setDate(launchDate.getDate() + 21);
-
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate.getTime() - now;
-
-      if (distance < 0) {
-        ["days", "hours", "minutes", "seconds"].forEach(
-          (id) => ((document.getElementById(id)!.textContent = "0"))
-        );
-        clearInterval(timer);
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("days")!.textContent = String(days);
-      document.getElementById("hours")!.textContent = String(hours).padStart(2, "0");
-      document.getElementById("minutes")!.textContent = String(minutes).padStart(2, "0");
-      document.getElementById("seconds")!.textContent = String(seconds).padStart(2, "0");
-    }, 1000);
-
-    return () => clearInterval(timer);
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <>
-      {/* Background Elements */}
-      <div className="background-elements">
-        <div className="blob blob-1"></div>
-        <div className="blob blob-2"></div>
-        <div className="blob blob-3"></div>
+    <main className="relative overflow-hidden">
+      <Navbar />
+      <Hero />
+      <Countdown />
+      <Features />
+      <HowItWorks />
+      <Testimonials />
+      <CTA />
+      <Footer />
+
+      {/* Floating background elements */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        <div
+          className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"
+          style={{ animation: 'float 6s ease-in-out infinite' }}
+        />
+        <div
+          className="absolute top-40 right-10 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"
+          style={{ animation: 'float 7s ease-in-out infinite 1s' }}
+        />
+        <div
+          className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"
+          style={{ animation: 'float 8s ease-in-out infinite 2s' }}
+        />
       </div>
-
-      {/* Navigation */}
-      <nav>
-        <div className="logo-container">
-          <img src="/image.PNG" alt="elyAItra Logo" />
-          <span className="brand-name"></span>
-        </div>
-        <ul className="nav-links">
-          <li><a href="#features">Features</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#help">Help</a></li>
-        </ul>
-        <button className="cta-btn">Get Started</button>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1>
-            AI Learning Made <span>Simple & Smart</span>
-          </h1>
-          <p>
-            elyAItra is revolutionizing education for students everywhere.
-          </p>
-          <div className="hero-buttons">
-            <button className="btn-primary">Start Your Journey</button>
-            <button className="btn-secondary">Learn More</button>
-          </div>
-        </div>
-        <div className="hero-image">
-          <img src="/image.PNG" alt="elyAItra Hero" />
-        </div>
-      </section>
-
-      {/* Countdown Section */}
-      <section className="countdown-section">
-        <h2>
-          Launching In <span>...</span>
-        </h2>
-        <div className="countdown">
-          {["Days", "Hours", "Minutes", "Seconds"].map((label) => (
-            <div className="countdown-box" key={label}>
-              <div
-                className="countdown-number"
-                id={label.toLowerCase()}
-              >
-                00
-              </div>
-              <div className="countdown-label">{label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="features" id="features">
-        <div className="section-title">
-          <h2>
-            Why Choose <span>elyAItra?</span>
-          </h2>
-          <p>Empowering students with intelligent learning solutions</p>
-        </div>
-
-        <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon">🤖</div>
-            <h3>AI-Powered Learning</h3>
-            <p>Personalized AI learning paths.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">⚡</div>
-            <h3>Lightning Fast</h3>
-            <p>Instant answers and feedback.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer>
-        <p>© 2025 elyAItra. All rights reserved.</p>
-        <p>Making the future easier for students worldwide.</p>
-        <p>Contact: hello@elyaitra.com</p>
-      </footer>
-    </>
+    </main>
   );
 }
