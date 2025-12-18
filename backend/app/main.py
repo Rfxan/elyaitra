@@ -12,20 +12,17 @@ app = FastAPI(
     version="0.1.0"
 )
 
-
-# Add CORS middleware
+# ✅ FIXED CORS (ALLOW FRONTEND + LOCAL)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],  # allow all origins for v1 MVP
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # Register API routers
 app.include_router(health_router)
 app.include_router(auth_router)
 app.include_router(payments_router)
 app.include_router(access_router)
-
