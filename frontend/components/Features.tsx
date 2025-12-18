@@ -1,54 +1,62 @@
-'use client';
+"use client";
 
 import { motion } from "framer-motion";
-import { Brain, Clock, Zap, Target, TrendingUp, ShieldCheck } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import {
+  Brain,
+  Clock,
+  Zap,
+  Target,
+  TrendingUp,
+  ShieldCheck,
+} from "lucide-react";
 
 export default function ProblemSolution() {
   const painPoints = [
     { title: "Limited Time", desc: "Struggling to balance academics with life." },
     { title: "Academic Pressure", desc: "Overwhelmed by constant deadlines." },
-    { title: "Inefficient Study", desc: "Spending hours without retaining info." }
+    { title: "Inefficient Study", desc: "Spending hours without retaining info." },
   ];
 
   const aiCapabilities = [
-    { 
-      icon: <Brain className="w-6 h-6 text-indigo-400" />, 
-      title: "AI-Assisted Learning", 
-      desc: "Get personalized, context-aware explanations instantly." 
+    {
+      icon: <Brain className="w-6 h-6 text-indigo-400" />,
+      title: "AI-Assisted Learning",
+      desc: "Get personalized, context-aware explanations instantly.",
     },
-    { 
-      icon: <Target className="w-6 h-6 text-purple-400" />, 
-      title: "Smart Task Breakdown", 
-      desc: "Turn overwhelming projects into manageable steps automatically." 
+    {
+      icon: <Target className="w-6 h-6 text-purple-400" />,
+      title: "Smart Task Breakdown",
+      desc: "Turn overwhelming projects into manageable steps automatically.",
     },
-    { 
-      icon: <TrendingUp className="w-6 h-6 text-pink-400" />, 
-      title: "Productivity Optimization", 
-      desc: "Optimize your schedule for peak mental performance." 
+    {
+      icon: <TrendingUp className="w-6 h-6 text-pink-400" />,
+      title: "Productivity Optimization",
+      desc: "Optimize your schedule for peak mental performance.",
     },
-    { 
-      icon: <ShieldCheck className="w-6 h-6 text-blue-400" />, 
-      title: "Personalized Guidance", 
-      desc: "An AI tutor that adapts to your specific learning style." 
-    }
+    {
+      icon: <ShieldCheck className="w-6 h-6 text-blue-400" />,
+      title: "Personalized Guidance",
+      desc: "An AI tutor that adapts to your specific learning style.",
+    },
   ];
 
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
-        
-        {/* Pain Points (Section 3) */}
+        {/* Pain Points */}
         <div className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">The Student Struggle is Real</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              The Student Struggle is Real
+            </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               We understand the challenges you face every day.
             </p>
           </div>
+
           <div className="grid md:grid-cols-3 gap-8">
             {painPoints.map((point, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -66,14 +74,16 @@ export default function ProblemSolution() {
           </div>
         </div>
 
-        {/* AI Capabilities (Section 4) */}
+        {/* AI Capabilities */}
         <div>
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-medium text-primary mb-4">
               <Zap size={12} />
               Core Technology
             </div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">What Our AI Model Does</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              What Our AI Model Does
+            </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Built specifically for academic contexts to maximize your potential.
             </p>
@@ -90,18 +100,22 @@ export default function ProblemSolution() {
                 className="group relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Card className="h-full bg-background border-white/10 p-6 relative z-10 hover:translate-y-[-4px] transition-transform duration-300">
+
+                <div className="h-full bg-background border border-white/10 p-6 rounded-2xl relative z-10 hover:-translate-y-1 transition-transform duration-300">
                   <div className="h-12 w-12 rounded-xl bg-background border border-white/10 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
                     {feature.icon}
                   </div>
-                  <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.desc}</p>
-                </Card>
+                  <h3 className="font-bold text-lg mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {feature.desc}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

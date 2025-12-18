@@ -2,15 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, PlayCircle } from "lucide-react";
 
 export default function Hero() {
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-      {/* Premium Background with Multiple Layers */}
+      {/* Premium Background */}
       <div className="absolute inset-0 z-0">
-        {/* Base Image */}
         <Image
           src="/premium-bg.png"
           alt="Premium Background"
@@ -19,10 +17,8 @@ export default function Hero() {
           className="object-cover"
         />
 
-        {/* Premium Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
 
-        {/* Animated Light Rays */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 blur-3xl rounded-full mix-blend-screen" />
           <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-purple-600/10 blur-3xl rounded-full mix-blend-screen" />
@@ -58,27 +54,23 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              size="lg"
-              className="h-12 px-8 text-base bg-gradient-to-r from-white to-white/80 text-black hover:from-white hover:to-white shadow-[0_0_40px_rgba(255,255,255,0.3)] border-0 rounded-full font-semibold"
+            <button
+              className="h-12 px-8 text-base bg-gradient-to-r from-white to-white/80 text-black hover:from-white hover:to-white shadow-[0_0_40px_rgba(255,255,255,0.3)] border-0 rounded-full font-semibold flex items-center"
             >
               Join the Waitlist
               <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            </button>
 
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-12 px-8 text-base border-white/20 bg-white/5 hover:bg-white/15 backdrop-blur-sm rounded-full font-medium transition-all duration-300"
+            <button
+              className="h-12 px-8 text-base border border-white/20 bg-white/5 hover:bg-white/15 backdrop-blur-sm rounded-full font-medium transition-all duration-300 flex items-center"
             >
               <PlayCircle className="mr-2 h-4 w-4" />
               Watch Demo
-            </Button>
+            </button>
           </div>
         </motion.div>
       </div>
 
-      {/* Additional Premium Glow Effects */}
       <div className="absolute -top-1/2 left-1/2 -translate-x-1/2 w-full h-96 bg-gradient-to-b from-primary/20 to-transparent blur-3xl pointer-events-none -z-10" />
     </section>
   );

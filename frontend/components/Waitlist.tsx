@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Loader2, Mail, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -34,10 +33,13 @@ export default function Waitlist() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-            Be the first to experience <span className="text-gradient-primary">ElyAItra</span>
+            Be the first to experience{" "}
+            <span className="text-gradient-primary">ElyAItra</span>
           </h2>
+
           <p className="text-lg text-muted-foreground mb-10">
-            Join thousands of students waiting to revolutionize their learning workflow. Get early access and exclusive launch perks.
+            Join thousands of students waiting to revolutionize their learning
+            workflow. Get early access and exclusive launch perks.
           </p>
 
           <AnimatePresence mode="wait">
@@ -66,18 +68,23 @@ export default function Waitlist() {
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-muted-foreground focus:outline-none"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full h-12 px-4 pl-10 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-muted-foreground focus:outline-none"
                   />
-
                 </div>
-                <Button
+
+                <button
                   type="submit"
-                  size="lg"
-                  className="h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-xl font-medium text-lg min-w-[140px]"
                   disabled={status === "loading"}
+                  className="h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-xl font-medium text-lg min-w-[140px] flex items-center justify-center disabled:opacity-60"
                 >
-                  {status === "loading" ? <Loader2 className="animate-spin" /> : "Join Now"}
-                </Button>
+                  {status === "loading" ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    "Join Now"
+                  )}
+                </button>
               </motion.form>
             )}
           </AnimatePresence>
