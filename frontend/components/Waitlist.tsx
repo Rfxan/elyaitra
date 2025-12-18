@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Loader2, Mail, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -13,9 +12,9 @@ export default function Waitlist() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    
+
     setStatus("loading");
-    
+
     // Simulate API call
     setTimeout(() => {
       setStatus("success");
@@ -43,7 +42,7 @@ export default function Waitlist() {
 
           <AnimatePresence mode="wait">
             {status === "success" ? (
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 className="bg-green-500/10 border border-green-500/20 text-green-400 p-6 rounded-2xl flex flex-col items-center gap-3"
@@ -55,27 +54,25 @@ export default function Waitlist() {
                 <p>We'll notify you as soon as we launch.</p>
               </motion.div>
             ) : (
-              <motion.form 
+              <motion.form
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onSubmit={handleSubmit} 
+                onSubmit={handleSubmit}
                 className="flex flex-col sm:flex-row gap-3"
               >
                 <div className="relative flex-1">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
-                  <Input 
-                    type="email" 
-                    placeholder="Enter your email address" 
-                    className="pl-10 h-14 bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/50 rounded-xl focus-visible:ring-primary"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-muted-foreground focus:outline-none"
                   />
+
                 </div>
-                <Button 
-                  type="submit" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  size="lg"
                   className="h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-xl font-medium text-lg min-w-[140px]"
                   disabled={status === "loading"}
                 >
@@ -84,7 +81,7 @@ export default function Waitlist() {
               </motion.form>
             )}
           </AnimatePresence>
-          
+
           <p className="mt-6 text-sm text-muted-foreground/60">
             No spam. Unsubscribe anytime.
           </p>
