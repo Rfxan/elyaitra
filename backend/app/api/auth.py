@@ -39,14 +39,28 @@ def me(user_id: int):
     conn = get_db_connection()
     cursor = conn.cursor()
 
+    # Get user
     cursor.execute(
         "SELECT id, email FROM users WHERE id = ?",
         (user_id,)
     )
     user = cursor.fetchone()
-    conn.close()
 
     if not user:
+        conn.close()
         raise HTTPException(status_code=404, detail="User not found")
 
-    return dict(user)
+    # Check payment
+    cursor.execute(
+        "SELECT 1 FROM payments WHERE user_id = ? LIMIT 1",
+        (user_id,)
+    )
+    payment = cursor.fetchone()
+
+    conn.close()
+
+    return {
+        "user_id": user["id"],
+        "email": user["email"],
+        "has_paid": payment is not None
+    }

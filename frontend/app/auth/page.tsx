@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Mail, Loader2 } from "lucide-react";
 import { API_BASE_URL } from "@/lib/api";
+import { saveUserId } from "@/lib/auth";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function AuthPage() {
       const data = await res.json();
 
       // store user_id (temporary auth)
-      localStorage.setItem("user_id", String(data.user_id));
+      saveUserId(data.user_id);
 
       router.push("/subjects");
     } catch (err) {
