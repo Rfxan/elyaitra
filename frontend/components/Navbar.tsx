@@ -94,7 +94,7 @@ export default function Navbar() {
             </a>
 
             <div className="flex flex-col gap-2 pt-4 border-t border-white/5">
-              <Link href="/login">
+              <Link href="/auth">
                 <button className="w-full justify-center border border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-full font-medium py-2 flex items-center justify-center gap-2">
                   <LogIn size={16} />
                   Login
