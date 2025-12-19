@@ -1,28 +1,37 @@
-from retriever import retrieve
-from llm_client import LocalOllamaClient
+from app.ai_engine.llm_client import LocalOllamaClient
+from app.ai_engine.retriever import retrieve_chunks
 
-# Load strict system prompt
-with open("prompts/chat.txt", "r", encoding="utf-8") as f:
+# Load strict system prompt once
+with open("app/ai_engine/prompts/chat.txt", "r", encoding="utf-8") as f:
     PROMPT_TEMPLATE = f.read()
 
+# Initialize LLM once (DO NOT recreate per request)
 llm = LocalOllamaClient()
 
-def chat(question: str) -> str:
-    # 1. Retrieve syllabus chunks
-    chunks = retrieve(question)
 
-    # 2. If nothing found → Not in syllabus
-    if not chunks or len(chunks) == 0:
+def generate_chat_response(question: str, subject: str) -> str:
+    """
+    Generate an answer strictly based on syllabus content.
+    Returns 'Not in syllabus' if no relevant chunks are found.
+    """
+
+    # 1. Retrieve relevant syllabus chunks
+    chunks = retrieve_chunks(question, subject)
+
+    # 2. If nothing retrieved → outside syllabus
+    if not chunks:
         return "Not in syllabus"
 
-    # 3. Build context
-    context = "\n".join(chunks)
+    # 3. Build context from retrieved chunks
+    context = "\n\n".join(chunks)
 
-    # 4. Inject into strict prompt
-    final_prompt = PROMPT_TEMPLATE.format(
+    # 4. Inject context into strict prompt
+    prompt = PROMPT_TEMPLATE.format(
         context=context,
         question=question
     )
 
-    # 5. Generate answer
-    return llm.generate(final_prompt)
+    # 5. Generate answer using the preloaded LLM
+    answer = llm.generate(prompt)
+
+    return answer.strip()
